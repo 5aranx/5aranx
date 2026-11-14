@@ -392,8 +392,9 @@ ICONS = {
                          f'A4.2 4.2 0 0 1 {x + 5} {y}Z" fill="none" stroke="{T["muted"]}" stroke-width="1.3"/>'
                          f'<circle cx="{x + 5}" cy="{y + 4.2}" r="1.4" fill="{T["muted"]}"/>'),
 }
-FLAME = ('<path d="M8 0c1.6 3.4 4.4 5.6 4.4 9.6a4.4 4.4 0 0 1-8.8 0c0-2 .8-3.6 2-5.2'
-         '.1 1.7.7 2.6 1.6 3.1C7.4 5.6 8 3 8 0Z" fill="{c}"/>')
+FLAME = ('<path d="M10.4 0C10 3.8 11.6 5.8 12.6 7.9C13.6 10.2 13 13.4 10.6 14.9'
+         'C8.4 16.2 5.4 15.6 3.8 13.4C2 10.9 3 8.2 4.4 6.2C5.4 4.8 6 3.4 5.9 1.6'
+         'C7 3.9 8 4.8 8.8 5.2C9 3.4 9.9 1.6 10.4 0Z" fill="{c}"/>')
 
 
 def days_series(d):
@@ -511,14 +512,12 @@ def streak(d):
     c.text(x1, 184, f"{first.strftime('%b %Y').upper()} — PRESENT", "mono", 8.5, "faint", "middle", ls=1.2)
     c.close()
     # current streak, with the ring
-    cx, cy, r = x2, 112, 34
+    cx, cy, r = x2, 117, 31
     c.open(220)
     c.add(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{T["soft"]}" stroke-width="6"/>')
-    c.add(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{T["acc"]}" stroke-width="6" '
-          f'stroke-linecap="round" transform="rotate(-90 {cx} {cy})" '
-          f'stroke-dasharray="{2 * 3.14159265 * r:.1f} {2 * 3.14159265 * r:.1f}"/>')
-    c.add(f'<g transform="translate({cx - 7} {cy - r - 28}) scale(1.5)">{FLAME.format(c=T["acc"])}</g>')
-    c.text(cx, cy + 12, str(d["current_streak"]), "disp", 34, "ink", "middle")
+    c.add(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{T["acc"]}" stroke-width="6"/>')
+    c.add(f'<g transform="translate({cx - 6.8:g} {cy - r - 23:g}) scale(1.3)">{FLAME.format(c=T["acc"])}</g>')
+    c.text(cx, cy + 11, str(d["current_streak"]), "disp", 34, "ink", "middle")
     c.text(x2, 160, "Current streak", "sansb", 14, "ink", "middle")
     c.text(x2, 184, f"AS OF {today.strftime('%d %b').upper()}", "mono", 8.5, "faint", "middle", ls=1.2)
     c.close()
