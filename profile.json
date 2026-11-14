@@ -1,0 +1,30 @@
+{
+  "name": "Saransh",
+  "handle": "5aranx",
+  "tagline": "Final-year ECE student working on red-team, mobile and hardware security.",
+  "meta": ["Cybersecurity Lead ’26", "DCRUST Murthal", "CPENT"],
+  "portrait": null,
+  "tiles": [
+    {"label": "Work", "title": "Projects", "sub": "Hardware, mobile, drones", "url": "https://github.com/5aranx?tab=repositories"},
+    {"label": "Credentials", "title": "CPENT + 4 OPSWAT", "sub": "EC-Council, OPSWAT", "url": "https://www.linkedin.com/in/mastermorphix"},
+    {"label": "Contact", "title": "LinkedIn", "sub": "Connect or message", "url": "https://www.linkedin.com/in/mastermorphix"}
+  ],
+  "repos": [
+    {
+      "slug": "5aranx/Mayavi", "name": "Mayavi", "url": "https://github.com/5aranx/Mayavi",
+      "description": "BLE HID emulation and keystroke framework for the ESP32-S3, with a Wi-Fi dashboard served from the device itself.",
+      "tags": ["BLE", "HID", "ESP32-S3", "Wi-Fi dashboard"]
+    },
+    {
+      "slug": "5aranx/PUF-Based-Drone-Authentication-System", "name": "PUF drone authentication",
+      "url": "https://github.com/5aranx/PUF-Based-Drone-Authentication-System",
+      "description": "Hardware-rooted UAV authentication. SRAM PUFs and BCH fuzzy extractors rebuild a 128-bit secret from silicon variation, so no key is stored in flash. ESP32 firmware in C, single-use nonce HMAC, Flask command dashboard.",
+      "tags": ["SRAM PUF", "BCH", "HMAC", "ESP32", "Flask"]
+    },
+    {
+      "slug": null, "name": "Drax", "url": null, "private": true, "language": "Python", "language_color": "#3572A5",
+      "description": "Mobile app security scanner: a Python core plus an Android agent over ADB, built to keep working inside RASP-protected apps. About 50 checks across static, dynamic and Frida-based testing. Private, for authorised assessments.",
+      "tags": ["Python", "Android", "ADB", "Frida", "RASP"]
+    }
+  ]
+}
