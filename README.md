@@ -1,6 +1,6 @@
 <!-- Cards in cards/ are generated: edit profile.json or render_cards.py, not the SVGs. -->
 
-<img src="cards/hero.svg" width="100%" alt="Saransh, final-year ECE student working on red-team, mobile and hardware security">
+<img src="cards/hero.svg" width="100%" alt="Saransh Singh, final-year ECE student working on red-team, mobile and hardware security">
 
 <a href="https://github.com/5aranx?tab=repositories"><img src="cards/tile-0.svg" width="32.5%" alt="Projects: hardware, mobile, drones"></a>
 <a href="https://www.linkedin.com/in/mastermorphix"><img src="cards/tile-1.svg" width="32.5%" alt="Credentials: CPENT and four OPSWAT certifications"></a>
