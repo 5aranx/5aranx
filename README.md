@@ -35,7 +35,7 @@
 
 <img src="cards/details.svg?v=4cbf0665f3" width="100%" alt="GitHub summary: 104 contributions in the last year, public repo count, join date and location, with a daily contribution curve." />
 
-<img src="cards/streak.svg?v=2e80a5d954" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
+<img src="cards/streak.svg?v=09d518db35" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
 
 <img src="cards/graph.svg?v=a489088f08" width="100%" alt="GitHub contribution graph for the last year." />
 
