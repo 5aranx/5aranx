@@ -118,7 +118,7 @@ def main():
     out = summarize(week_rows(u["grid"]["contributionCalendar"]["weeks"]),
                     week_rows(u["months"]["contributionCalendar"]["weeks"]), today)
 
-    slugs = [r["slug"] for r in profile["repos"] if r.get("slug")]
+    slugs = [r["slug"] for r in profile["projects"] if r.get("slug")]
     out["repos"] = {}
     if slugs:
         frags = " ".join(
