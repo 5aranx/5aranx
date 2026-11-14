@@ -488,7 +488,7 @@ def details(p, d):
 
 
 def streak(d):
-    H = 228
+    H = 234
     acct = d["account"]
     first = dt.date.fromisoformat(d["all_time"]["since"])
     today = dt.date.today()
@@ -503,35 +503,35 @@ def streak(d):
     x1, x2, x3 = PAD + slot * .5, PAD + slot * 1.5, PAD + slot * 2.5
     c.open(120)
     for x in (PAD + slot, PAD + slot * 2):
-        c.line(x, 86, x, 202, "soft")
+        c.line(x, 88, x, 208, "soft")
     c.close()
     # total
     c.open(160)
-    c.text(x1, 136, f"{d['all_time']['total']:,}", "disp", 42, "ink", "middle")
-    c.text(x1, 170, "Total contributions", "sans", 13, "dim", "middle")
-    c.text(x1, 194, f"{first.strftime('%b %Y').upper()} — PRESENT", "mono", 8.5, "faint", "middle", ls=1.2)
+    c.text(x1, 142, f"{d['all_time']['total']:,}", "disp", 42, "ink", "middle")
+    c.text(x1, 178, "Total contributions", "sans", 13, "dim", "middle")
+    c.text(x1, 200, f"{first.strftime('%b %Y').upper()} — PRESENT", "mono", 8.5, "faint", "middle", ls=1.2)
     c.close()
     # current streak, with the ring
-    cx, cy, r = x2, 124, 29
+    cx, cy, r = x2, 128, 28
     c.open(220)
     c.add(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{T["soft"]}" stroke-width="6"/>')
     c.add(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{T["acc"]}" stroke-width="6"/>')
-    c.add(f'<g transform="translate({cx - 6.5:g} {cy - r - 26:g}) scale(1.25)">{FLAME.format(c=T["acc"])}</g>')
-    c.text(cx, cy + 11, str(d["current_streak"]), "disp", 34, "ink", "middle")
-    c.text(x2, 170, "Current streak", "sansb", 14, "ink", "middle")
-    c.text(x2, 194, f"AS OF {today.strftime('%d %b').upper()}", "mono", 8.5, "faint", "middle", ls=1.2)
+    c.add(f'<g transform="translate({cx - 6.5:g} {cy - r - 32:g}) scale(1.25)">{FLAME.format(c=T["acc"])}</g>')
+    c.text(cx, cy + 13, str(d["current_streak"]), "disp", 34, "ink", "middle")
+    c.text(x2, 178, "Current streak", "sansb", 14, "ink", "middle")
+    c.text(x2, 200, f"AS OF {today.strftime('%d %b').upper()}", "mono", 8.5, "faint", "middle", ls=1.2)
     c.close()
     # longest
     c.open(280)
-    c.text(x3, 136, str(long_.get("days", 0)), "disp", 42, "ink", "middle")
-    c.text(x3, 170, "Longest streak", "sans", 13, "dim", "middle")
+    c.text(x3, 142, str(long_.get("days", 0)), "disp", 42, "ink", "middle")
+    c.text(x3, 178, "Longest streak", "sans", 13, "dim", "middle")
     if long_:
         f, t = dt.date.fromisoformat(long_["from"]), dt.date.fromisoformat(long_["to"])
         rng = (f"{f.strftime('%d %b').upper()} — {t.strftime('%d %b').upper()}" if f.month == t.month
                else f"{f.strftime('%d %b').upper()} — {t.strftime('%d %b').upper()}")
-        c.text(x3, 194, rng + "  ·  12 MO", "mono", 8.5, "faint", "middle", ls=1.2)
+        c.text(x3, 200, rng + "  ·  12 MO", "mono", 8.5, "faint", "middle", ls=1.2)
     else:
-        c.text(x3, 194, "NONE IN THE LAST 12 MO", "mono", 8.5, "faint", "middle", ls=1.2)
+        c.text(x3, 200, "NONE IN THE LAST 12 MO", "mono", 8.5, "faint", "middle", ls=1.2)
     c.close()
     return c
 
