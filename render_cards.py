@@ -523,11 +523,9 @@ def main():
     cards += [about(profile), workhead(profile["projects"], data)]
     projs = profile["projects"]
     repo_meta = lambda r: data.get("repos", {}).get(r.get("slug") or "", {})
-    for start in range(0, len(projs), 2):
-        pair = projs[start:start + 2]
-        h = max(286, *(round(project_layout(r)[2]) + 44 for r in pair))
-        cards += [project(r, start + k, repo_meta(r), 200 + (start + k) * 80, h)
-                  for k, r in enumerate(pair)]
+    # one height for every project card keeps the two-column grid square
+    ph = max(286, *(round(project_layout(r)[2]) + 44 for r in projs))
+    cards += [project(r, i, repo_meta(r), 200 + i * 80, ph) for i, r in enumerate(projs)]
     cards += [focus(profile), how(profile), chart(data), graph(data, 600), priorities(profile), closing(profile)]
     OUT.mkdir(exist_ok=True)
     for old in OUT.glob("*.svg"):
