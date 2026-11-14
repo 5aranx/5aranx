@@ -440,7 +440,7 @@ def details(p, d):
     c.open(120)
     c.text(PAD, 92, f"{p['handle']} ({acct['name'].split(' (')[0]})", "sansb", 19, "acc")
     rows = [
-        ("bars", f"{d['total']:,} contributions on GitHub"),
+        ("bars", f"{d['total']:,} contributions in the last year"),
         ("repo", f"{acct['public_repos']} public repos"),
         ("clock", f"Joined GitHub {years_ago(acct['joined'], today)}  ·  {acct['joined']}"),
     ]
