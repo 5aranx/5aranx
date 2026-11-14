@@ -16,7 +16,7 @@ final frame.
 Data: profile.json (hand-written) + contribution_data.json (refreshed daily).
 """
 from __future__ import annotations
-import base64, datetime as dt, html, json, os, random, shutil, subprocess, sys, tempfile
+import base64, datetime as dt, hashlib, html, json, os, random, re, shutil, subprocess, sys, tempfile
 from collections import defaultdict
 from pathlib import Path
 
@@ -634,6 +634,30 @@ def synth(profile):
     return out
 
 
+def stamp_readme():
+    """Append ?v=<content hash> to every cards/*.svg reference.
+
+    GitHub and browsers cache images by URL, and every card is regenerated
+    (daily, by the Action) at the same path. Versioning the URL is what makes
+    a refreshed card actually show up instead of a stale copy.
+    """
+    path = ROOT / "README.md"
+    if not path.exists():
+        return
+    text = path.read_text(encoding="utf-8")
+
+    def repl(m):
+        card = OUT / f"{m.group(1)}.svg"
+        if not card.exists():
+            return m.group(0)
+        return f"cards/{m.group(1)}.svg?v={hashlib.sha1(card.read_bytes()).hexdigest()[:10]}"
+
+    new = re.sub(r"cards/([a-z0-9-]+)\.svg(?:\?v=[0-9a-f]+)?", repl, text)
+    if new != text:
+        path.write_text(new, encoding="utf-8")
+        print("  README.md  versioned image URLs")
+
+
 def main():
     profile = json.loads((ROOT / "profile.json").read_text())
     if SAMPLE:
@@ -657,6 +681,7 @@ def main():
     for c in cards:
         (OUT / f"{c.name}.svg").write_text(c.svg(), encoding="utf-8")
         print(f"  cards/{c.name}.svg  {(OUT / f'{c.name}.svg').stat().st_size / 1024:.1f} KB")
+    stamp_readme()
     print(f"{len(cards)} cards [{'STATIC' if STATIC else 'animated'}{', SAMPLE data' if SAMPLE else ''}]")
 
 
