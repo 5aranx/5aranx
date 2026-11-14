@@ -82,7 +82,7 @@ def summarize(grid_rows, month_rows, today):
 
 
 # ---- GitHub ----------------------------------------------------------------
-def gql(query, variables, token):
+def gql(query, variables, token, tolerate_missing=False):
     req = Request(ENDPOINT, data=json.dumps({"query": query, "variables": variables}).encode(),
                   headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
     try:
@@ -90,8 +90,15 @@ def gql(query, variables, token):
             res = json.loads(r.read())
     except HTTPError as e:
         sys.exit(f"GitHub API error {e.code}: {e.read().decode()[:400]}")
-    if res.get("errors"):
-        sys.exit(f"GraphQL errors: {res['errors']}")
+    errs = res.get("errors") or []
+    if errs:
+        # The Action's GITHUB_TOKEN only sees this repository, so a private
+        # featured repo resolves to NOT_FOUND. Skip those, fail on anything else.
+        if tolerate_missing and all(e.get("type") == "NOT_FOUND" for e in errs):
+            for e in errs:
+                print(f"warning: {e.get('message')}", file=sys.stderr)
+            return res.get("data") or {}
+        sys.exit(f"GraphQL errors: {errs}")
     return res["data"]
 
 
@@ -124,7 +131,7 @@ def main():
         frags = " ".join(
             f'r{i}:repository(owner:{json.dumps(s.split("/")[0])},name:{json.dumps(s.split("/")[1])})'
             "{stargazerCount primaryLanguage{name color}}" for i, s in enumerate(slugs))
-        data = gql("query{" + frags + "}", {}, token)
+        data = gql("query{" + frags + "}", {}, token, tolerate_missing=True)
         for i, s in enumerate(slugs):
             r = data.get(f"r{i}")
             if r:

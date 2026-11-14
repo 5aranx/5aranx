@@ -3,34 +3,70 @@
   "handle": "5aranx",
   "kicker": "@5aranx  ·  DCRUST Murthal  ·  India",
   "role": "Final-year ECE student working on offensive security, mobile and hardware.",
-  "facts": ["CPENT", "4× OPSWAT", "HackRust 1.0 organiser", "NCC Senior Under Officer"],
+  "facts": [
+    "CPENT",
+    "4× OPSWAT",
+    "HackRust 1.0 organiser",
+    "NCC Senior Under Officer"
+  ],
   "links": [
-    {"label": "GitHub", "title": "5aranx", "sub": "Repositories and work", "url": "https://github.com/5aranx?tab=repositories"},
-    {"label": "LinkedIn", "title": "mastermorphix", "sub": "Connect or message", "url": "https://www.linkedin.com/in/mastermorphix"},
-    {"label": "X", "title": "@saransh_singh05", "sub": "Notes and CTFs", "url": "https://x.com/saransh_singh05"}
+    {
+      "label": "GitHub",
+      "title": "5aranx",
+      "sub": "Repositories and work",
+      "url": "https://github.com/5aranx?tab=repositories"
+    },
+    {
+      "label": "LinkedIn",
+      "title": "mastermorphix",
+      "sub": "Connect or message",
+      "url": "https://www.linkedin.com/in/mastermorphix"
+    },
+    {
+      "label": "X",
+      "title": "@saransh_singh05",
+      "sub": "Notes and CTFs",
+      "url": "https://x.com/saransh_singh05"
+    }
   ],
   "about": [
     "I'm Saransh Singh, a final-year Electronics and Communication Engineering student at DCRUST Murthal, India, and Cybersecurity Lead for the 2026 batch. I started on the blue-team side — logs, kill chains, indicators — and now spend most of my time on offence: mobile application testing, hardware security and drone authentication.",
     "I learn by building. A BLE HID framework on an ESP32-S3, an authentication scheme that rebuilds its key from silicon instead of storing one, a scanner that keeps working inside RASP-protected Android apps. Each one ends with a write-up that says what works, what doesn't, and what I would do differently."
   ],
   "pillars": [
-    {"label": "Build", "body": "Offensive tooling, mobile app assessments, ESP32 firmware and the occasional desktop environment."},
-    {"label": "Explore", "body": "Android internals, BLE, physical unclonable functions, and the places where hardware and app security meet."},
-    {"label": "Improve", "body": "Report quality, reproducible testing, and the habit of proving a finding rather than assuming it."}
+    {
+      "label": "Build",
+      "body": "Offensive tooling, mobile app assessments, ESP32 firmware and the occasional desktop environment."
+    },
+    {
+      "label": "Explore",
+      "body": "Android internals, BLE, physical unclonable functions, and the places where hardware and app security meet."
+    },
+    {
+      "label": "Improve",
+      "body": "Report quality, reproducible testing, and the habit of proving a finding rather than assuming it."
+    }
   ],
   "projects": [
     {
-      "slug": "5aranx/Mayavi", "name": "Mayavi", "url": "https://github.com/5aranx/Mayavi",
+      "slug": "5aranx/Mayavi",
+      "name": "Mayavi",
+      "url": "https://github.com/5aranx/Mayavi",
       "description": "BLE HID emulation and keystroke framework for the ESP32-S3, with a Wi-Fi dashboard served from the device itself.",
       "bullets": [
         "Configurable HID payloads over Bluetooth Low Energy",
         "On-board web dashboard, no host software required",
         "C++ firmware built on the Arduino and ESP-IDF toolchain"
       ],
-      "tags": ["BLE", "HID", "ESP32-S3"]
+      "tags": [
+        "BLE",
+        "HID",
+        "ESP32-S3"
+      ]
     },
     {
-      "slug": "5aranx/PUF-Based-Drone-Authentication-System", "name": "PUF drone authentication",
+      "slug": "5aranx/PUF-Based-Drone-Authentication-System",
+      "name": "PUF drone authentication",
       "url": "https://github.com/5aranx/PUF-Based-Drone-Authentication-System",
       "description": "Hardware-rooted UAV authentication. SRAM PUFs and BCH fuzzy extractors rebuild a 128-bit secret from silicon variation, so no key sits in flash.",
       "bullets": [
@@ -38,62 +74,132 @@
         "A firmware dump yields public helper data and nothing else",
         "ESP32 firmware in C, Flask command dashboard"
       ],
-      "tags": ["SRAM PUF", "BCH", "HMAC", "Flask"]
+      "tags": [
+        "SRAM PUF",
+        "BCH",
+        "HMAC",
+        "Flask"
+      ]
     },
     {
-      "slug": null, "name": "Drax", "url": null, "private": true, "language": "Python", "language_color": "#3572A5",
+      "slug": null,
+      "name": "Drax",
+      "url": null,
+      "private": true,
+      "language": "Python",
+      "language_color": "#3572A5",
       "description": "Mobile app security scanner: a Python core plus an Android agent over ADB, built to keep working inside RASP-protected apps.",
       "bullets": [
         "About 50 checks across static, dynamic and Frida-based testing",
         "Scope-limited by design: authorised assessments only",
         "Not public, so this card says so instead of linking nowhere"
       ],
-      "tags": ["Python", "Android", "ADB", "Frida"]
+      "tags": [
+        "Python",
+        "Android",
+        "ADB",
+        "Frida"
+      ]
     },
     {
-      "slug": "5aranx/quarters", "name": "Quarters", "url": "https://github.com/5aranx/quarters",
+      "slug": null,
+      "name": "Quarters",
+      "url": null,
       "description": "Open, self-hostable virtual HQ: a pixel-art world with proximity voice and video, and Discord-style spaces.",
       "bullets": [
         "Proximity audio and video that react to where you stand",
-        "Self-hostable, one deploy for a whole team",
+        "Self-hostable: one deploy for a whole team",
         "Built as a workspace rather than a video call"
       ],
-      "tags": ["Realtime", "Pixel art", "Self-hosted"]
+      "tags": [
+        "Realtime",
+        "Pixel art",
+        "Self-hosted"
+      ],
+      "private": true,
+      "status": "Private"
     },
     {
-      "slug": "5aranx/SaviOS_hyprland", "name": "SaviOS desktop", "url": "https://github.com/5aranx/SaviOS_hyprland",
+      "slug": null,
+      "name": "SaviOS desktop",
+      "url": null,
       "description": "A reproducible Arch desktop: packages, CachyOS kernel and Hyprland configuration from one shell-scripted source of truth.",
       "bullets": [
         "Idempotent install script, rebuildable from scratch",
         "Hyprland, Quickshell bar and a matched terminal stack",
         "Also kept as cachyos-env for tuned hardware"
       ],
-      "tags": ["Arch Linux", "Hyprland", "Shell"]
+      "tags": [
+        "Arch Linux",
+        "Hyprland",
+        "Shell"
+      ],
+      "private": true,
+      "status": "Private",
+      "language": "Shell",
+      "language_color": "#89e051"
     },
     {
-      "slug": null, "name": "More repositories", "url": "https://github.com/5aranx?tab=repositories", "status": "Index",
+      "slug": null,
+      "name": "More repositories",
+      "url": "https://github.com/5aranx?tab=repositories",
+      "status": "Index",
       "description": "Coursework, forensic lab notes, networking references and other experiments that did not make the shortlist.",
       "bullets": [
         "digital-forensics-lab: Windows artefact exercises",
         "networking-vault: a site for learning networking",
         "Labs and grc-portfolio: class work and governance notes"
       ],
-      "tags": ["Labs", "Notes", "Coursework"]
+      "tags": [
+        "Labs",
+        "Notes",
+        "Coursework"
+      ]
     }
   ],
   "focus": [
-    ["Offensive security", "Metasploit, Kali Linux, Android pentesting, PortSwigger labs (SQLi, XSS, SSRF, LLM prompt injection)"],
-    ["Mobile", "ADB, Frida, SSL pinning and root detection, RASP-protected apps"],
-    ["Hardware", "ESP32 and ESP32-S3, ESP-IDF, BLE, SRAM PUFs, BCH error correction"],
-    ["Languages", "Python, C, C++, TypeScript, SQL"],
-    ["Backend and tooling", "Flask, Docker, QEMU/KVM, Git, Linux"],
-    ["Blue team", "Log analysis, kill-chain mapping, IoC extraction"]
+    [
+      "Offensive security",
+      "Metasploit, Kali Linux, Android pentesting, PortSwigger labs (SQLi, XSS, SSRF, LLM prompt injection)"
+    ],
+    [
+      "Mobile",
+      "ADB, Frida, SSL pinning and root detection, RASP-protected apps"
+    ],
+    [
+      "Hardware",
+      "ESP32 and ESP32-S3, ESP-IDF, BLE, SRAM PUFs, BCH error correction"
+    ],
+    [
+      "Languages",
+      "Python, C, C++, TypeScript, SQL"
+    ],
+    [
+      "Backend and tooling",
+      "Flask, Docker, QEMU/KVM, Git, Linux"
+    ],
+    [
+      "Blue team",
+      "Log analysis, kill-chain mapping, IoC extraction"
+    ]
   ],
   "how": [
-    {"title": "Authorised scope only.", "body": "Drax exists for assessments on apps I own or have been engaged to test. The README says that before it says anything else."},
-    {"title": "Ask what the attacker gets.", "body": "For the PUF drone design the question was what a firmware dump reveals. The answer is public helper data and nothing else."},
-    {"title": "Say what's private.", "body": "Drax isn't public, so its card says PRIVATE instead of linking nowhere. Claims stay checkable."},
-    {"title": "Write it up.", "body": "Lab reports and READMEs get the same care as the code: setup, limits, evidence."}
+    {
+      "title": "Authorised scope only.",
+      "body": "Drax exists for assessments on apps I own or have been engaged to test. The README says that before it says anything else."
+    },
+    {
+      "title": "Ask what the attacker gets.",
+      "body": "For the PUF drone design the question was what a firmware dump reveals. The answer is public helper data and nothing else."
+    },
+    {
+      "title": "Say what's private.",
+      "body": "Drax isn't public, so its card says PRIVATE instead of linking nowhere. Claims stay checkable."
+    },
+    {
+      "title": "Write it up.",
+      "body": "Lab reports and READMEs get the same care as the code: setup, limits, evidence."
+    }
   ],
   "priorities": [
     "Turn the PUF work into a measurement-backed write-up rather than a demo.",

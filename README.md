@@ -21,10 +21,10 @@
 </tr>
 <tr>
 <td width="50%" valign="top"><img src="cards/project-2.svg" width="100%" alt="Drax, private: mobile app security scanner, a Python core plus an Android agent over ADB, built to keep working inside RASP-protected apps." /></td>
-<td width="50%" valign="top"><a href="https://github.com/5aranx/quarters"><img src="cards/project-3.svg" width="100%" alt="Quarters: open, self-hostable virtual HQ with a pixel-art world, proximity voice and video, and Discord-style spaces." /></a></td>
+<td width="50%" valign="top"><img src="cards/project-3.svg" width="100%" alt="Quarters, private: a self-hostable virtual HQ with a pixel-art world, proximity voice and video, and Discord-style spaces." /></td>
 </tr>
 <tr>
-<td width="50%" valign="top"><a href="https://github.com/5aranx/SaviOS_hyprland"><img src="cards/project-4.svg" width="100%" alt="SaviOS desktop: a reproducible Arch desktop, packages and Hyprland configuration from one shell-scripted source of truth." /></a></td>
+<td width="50%" valign="top"><img src="cards/project-4.svg" width="100%" alt="SaviOS desktop, private: a reproducible Arch desktop, packages and Hyprland configuration from one shell-scripted source of truth." /></td>
 <td width="50%" valign="top"><a href="https://github.com/5aranx?tab=repositories"><img src="cards/project-5.svg" width="100%" alt="More repositories: coursework, forensic lab notes, networking references and other experiments." /></a></td>
 </tr>
 </table>

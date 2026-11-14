@@ -297,7 +297,7 @@ def project(r, i, api, delay, h):
     c = Card(f"project-{i}", w, h, f"{r['name']}: {r['description']}")
     c.open(delay)
     c.text(HPAD, 30, f"{i + 1:02d}", "mono", 9.5, "acc", ls=1.4)
-    c.text(HPAD + 26, 30, r.get("status") or ("PRIVATE" if r.get("private") else "PUBLIC"),
+    c.text(HPAD + 26, 30, (r.get("status") or ("PRIVATE" if r.get("private") else "PUBLIC")).upper(),
            "mono", 9.5, "faint", ls=1.4)
     if r.get("url"):
         c.add(f'<g transform="translate({w - HPAD - 10} 20)">{ARROW.format(c=T["acc"])}</g>')
