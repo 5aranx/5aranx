@@ -220,14 +220,19 @@ def cover(p):
     return c
 
 
-def link_cell(l, i):
-    w, h = 256, 104
+def link_cell(l, i, w):
+    h, pad = 104, 20
     c = Card(f"link-{i}", w, h, f"{l['label']}: {l['title']}")
+    for what, face, size, s in (("label", "mono", 9.5, l["label"].upper()),
+                                ("title", "sansb", 15.5, l["title"]),
+                                ("sub", "sans", 11.5, l["sub"])):
+        if tw(face, s, size) > w - 2 * pad:
+            sys.exit(f"link {what} too wide for a {w:.0f}px card: {s!r}")
     c.open(220 + i * 90)
-    c.text(HPAD - 6, 32, l["label"].upper(), "mono", 9.5, "acc", ls=1.5)
-    c.text(HPAD - 6, 62, l["title"], "sansb", 16, "ink")
-    c.text(HPAD - 6, 84, l["sub"], "sans", 12, "muted")
-    c.add(f'<g transform="translate({w - 30} 22)">{ARROW.format(c=T["acc"])}</g>')
+    c.text(pad, 32, l["label"].upper(), "mono", 9.5, "acc", ls=1.5)
+    c.text(pad, 62, l["title"], "sansb", 15.5, "ink")
+    c.text(pad, 84, l["sub"], "sans", 11.5, "muted")
+    c.add(f'<g transform="translate({w - 28} 22)">{ARROW.format(c=T["acc"])}</g>')
     c.close()
     return c
 
@@ -666,7 +671,9 @@ def main():
         data = json.loads((ROOT / "contribution_data.json").read_text())
     else:
         sys.exit("contribution_data.json is missing: run fetch_contributions.py first (or SAMPLE=1 to preview the layout)")
-    cards = [cover(profile)] + [link_cell(l, i) for i, l in enumerate(profile["links"][:3])]
+    links = profile["links"][:4]
+    link_w = (CW - 16 * (len(links) - 1)) / len(links)
+    cards = [cover(profile)] + [link_cell(l, i, link_w) for i, l in enumerate(links)]
     cards += [about(profile), workhead(profile["projects"], data)]
     projs = profile["projects"]
     repo_meta = lambda r: data.get("repos", {}).get(r.get("slug") or "", {})

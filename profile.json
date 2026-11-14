@@ -11,6 +11,12 @@
   ],
   "links": [
     {
+      "label": "Website",
+      "title": "5aranx.github.io",
+      "sub": "Personal site",
+      "url": "https://5aranx.github.io/"
+    },
+    {
       "label": "GitHub",
       "title": "5aranx",
       "sub": "Repositories and work",

@@ -4,9 +4,10 @@
 
 <table>
 <tr>
-<td width="33%" valign="top"><a href="https://github.com/5aranx?tab=repositories"><img src="cards/link-0.svg?v=8b53d98553" width="100%" alt="GitHub: 5aranx, repositories and work" /></a></td>
-<td width="33%" valign="top"><a href="https://www.linkedin.com/in/mastermorphix"><img src="cards/link-1.svg?v=afea3255b2" width="100%" alt="LinkedIn: mastermorphix, connect or message" /></a></td>
-<td width="33%" valign="top"><a href="https://x.com/saransh_singh05"><img src="cards/link-2.svg?v=b01c411c00" width="100%" alt="X: @saransh_singh05, notes and CTFs" /></a></td>
+<td width="25%" valign="top"><a href="https://5aranx.github.io/"><img src="cards/link-0.svg?v=81408d7e6b" width="100%" alt="Website: 5aranx.github.io, personal site" /></a></td>
+<td width="25%" valign="top"><a href="https://github.com/5aranx?tab=repositories"><img src="cards/link-1.svg?v=b0e935c0e4" width="100%" alt="GitHub: 5aranx, repositories and work" /></a></td>
+<td width="25%" valign="top"><a href="https://www.linkedin.com/in/mastermorphix"><img src="cards/link-2.svg?v=a9781347f3" width="100%" alt="LinkedIn: mastermorphix, connect or message" /></a></td>
+<td width="25%" valign="top"><a href="https://x.com/saransh_singh05"><img src="cards/link-3.svg?v=8912f740e9" width="100%" alt="X: @saransh_singh05, notes and CTFs" /></a></td>
 </tr>
 </table>
 
@@ -35,7 +36,7 @@
 
 <img src="cards/details.svg?v=4cbf0665f3" width="100%" alt="GitHub summary: 104 contributions in the last year, public repo count, join date and location, with a daily contribution curve." />
 
-<img src="cards/streak.svg?v=09d518db35" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
+<img src="cards/streak.svg?v=2e80a5d954" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
 
 <img src="cards/graph.svg?v=a489088f08" width="100%" alt="GitHub contribution graph for the last year." />
 
