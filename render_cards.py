@@ -379,40 +379,161 @@ def plural(n, word):
     return f"{n} {word}{'' if n == 1 else 's'}"
 
 
-def chart(d):
-    H = 340
-    c = Card("chart", W, H, f"Contributions per month over the last 12 months: {d['total']} in total.")
+ICONS = {
+    "bars": lambda x, y: (f'<path d="M{x} {y + 9}v-4M{x + 4} {y + 9}v-8M{x + 8} {y + 9}v-6" fill="none" '
+                          f'stroke="{T["muted"]}" stroke-width="1.4" stroke-linecap="round"/>'),
+    "repo": lambda x, y: (f'<rect x="{x}" y="{y}" width="10" height="10" rx="1.5" fill="none" '
+                          f'stroke="{T["muted"]}" stroke-width="1.3"/>'
+                          f'<path d="M{x + 3} {y}v10" stroke="{T["muted"]}" stroke-width="1.3"/>'),
+    "clock": lambda x, y: (f'<circle cx="{x + 5}" cy="{y + 5}" r="4.6" fill="none" stroke="{T["muted"]}" stroke-width="1.3"/>'
+                           f'<path d="M{x + 5} {y + 2.4}V{y + 5.2}L{x + 7.4} {y + 6.6}" fill="none" '
+                           f'stroke="{T["muted"]}" stroke-width="1.3" stroke-linecap="round"/>'),
+    "pin": lambda x, y: (f'<path d="M{x + 5} {y}a4.2 4.2 0 0 1 4.2 4.2c0 3-4.2 6.4-4.2 6.4S{x + .8} {y + 7.2} {x + .8} {y + 4.2}'
+                         f'A4.2 4.2 0 0 1 {x + 5} {y}Z" fill="none" stroke="{T["muted"]}" stroke-width="1.3"/>'
+                         f'<circle cx="{x + 5}" cy="{y + 4.2}" r="1.4" fill="{T["muted"]}"/>'),
+}
+FLAME = ('<path d="M8 0c1.6 3.4 4.4 5.6 4.4 9.6a4.4 4.4 0 0 1-8.8 0c0-2 .8-3.6 2-5.2'
+         '.1 1.7.7 2.6 1.6 3.1C7.4 5.6 8 3 8 0Z" fill="{c}"/>')
+
+
+def days_series(d):
+    out = []
+    for wk in d["grid"]:
+        out += [c for c in wk["c"] if c is not None]
+    return out or [0]
+
+
+def smooth_points(vals, n=15):
+    """Centred moving average so the year reads as a curve, not a comb."""
+    out = []
+    for i in range(len(vals)):
+        lo, hi = max(0, i - n // 2), min(len(vals), i + n // 2 + 1)
+        out.append(sum(vals[lo:hi]) / (hi - lo))
+    return out
+
+
+def curve(pts):
+    if len(pts) < 3:
+        return "M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts)
+    d = f"M{pts[0][0]:.1f} {pts[0][1]:.1f}"
+    for i in range(1, len(pts) - 1):
+        mx, my = (pts[i][0] + pts[i + 1][0]) / 2, (pts[i][1] + pts[i + 1][1]) / 2
+        d += f" Q{pts[i][0]:.1f} {pts[i][1]:.1f} {mx:.1f} {my:.1f}"
+    d += f" T{pts[-1][0]:.1f} {pts[-1][1]:.1f}"
+    return d
+
+
+def years_ago(iso, today):
+    y0, m0, d0 = (int(x) for x in iso.split("-"))
+    n = today.year - y0 - ((today.month, today.day) < (m0, d0))
+    return f"{n} year{'' if n == 1 else 's'} ago" if n else "this year"
+
+
+def details(p, d):
+    H = 244
+    acct, today = d["account"], dt.date.today()
+    c = Card("details", W, H, f"GitHub summary: {d['total']} contributions in 12 months, "
+                              f"{acct['public_repos']} public repos, joined {acct['joined']}.")
     c.open(0)
-    c.head("05", "GitHub activity", f"{d['total']:,} contributions")
+    c.head("05", "GitHub activity", f"{d['total']} contributions")
     c.close()
-    b = d.get("busiest")
-    if b:
-        bd = dt.date.fromisoformat(b["date"])
-        big3, cap3 = str(b["count"]), f"Busiest day  ·  {bd.day} {bd.strftime('%b')} {bd.year}"
-    else:
-        big3, cap3 = "–", "Busiest day"
     c.open(120)
-    for i, (big, cap) in enumerate([(plural(d["current_streak"], "day"), "Current streak"),
-                                    (str(d["active_days"]), "Active days  ·  12 mo"), (big3, cap3)]):
-        x = PAD + i * 260
-        c.text(x, 108, big, "disp", 30, "ink")
-        c.text(x, 130, cap.upper(), "mono", 9.5, "faint", ls=1.2)
+    c.text(PAD, 92, f"{p['handle']} ({acct['name'].split(' (')[0]})", "sansb", 19, "acc")
+    rows = [
+        ("bars", f"{d['total']:,} contributions on GitHub"),
+        ("repo", f"{acct['public_repos']} public repos"),
+        ("clock", f"Joined GitHub {years_ago(acct['joined'], today)}  ·  {acct['joined']}"),
+    ]
+    if acct.get("location"):
+        rows.append(("pin", acct["location"]))
+    for i, (icon, label) in enumerate(rows):
+        y = 132 + i * 26
+        c.add(ICONS[icon](PAD, y - 9))
+        c.text(PAD + 22, y, label, "sans", 13, "dim")
     c.close()
-    months = d["months"]
-    mx = max((m["count"] for m in months), default=0) or 1
-    base, maxh, slot = 292, 96, CW / 12
-    c.open(200)
-    c.line(PAD, base + .5, W - PAD, base + .5)
+
+    x0, x1, ytop, ybase = 470, W - PAD - 26, 92, 188
+    vals = smooth_points(days_series(d), 15)
+    top = max(vals) or 1
+    step = max(1, round(top / 4))
+    nice = step * 4
+    c.open(220, "fade")
+    c.text(x1, 80, "CONTRIBUTIONS IN THE LAST YEAR", "mono", 8.5, "faint", "end", ls=1.2)
+    for k in range(5):
+        v = step * k
+        y = ybase - (v / nice) * (ybase - ytop)
+        c.line(x1 - 4, y, x1, y, "soft")
+        c.text(x1 + 7, y + 3, str(v), "mono", 8, "faint")
+    c.line(x0, ybase, x1, ybase, "soft")
+    pts = [(x0 + (x1 - x0) * i / (len(vals) - 1), ybase - (v / nice) * (ybase - ytop))
+           for i, v in enumerate(vals)]
+    body = curve(pts)
+    c.add(f'<path d="{body} L{x1:.1f} {ybase} L{x0:.1f} {ybase} Z" fill="{T["acc"]}" opacity=".16"/>')
+    c.add(f'<path d="{body}" fill="none" stroke="{T["acc"]}" stroke-width="1.8" stroke-linejoin="round"/>')
+    # month ticks under the curve
+    grid, last_x = d["grid"], -99
+    for wi, wk in enumerate(grid):
+        s = dt.date.fromisoformat(wk["s"])
+        x = x0 + (x1 - x0) * min(len(vals) - 1, wi * 7) / (len(vals) - 1)
+        for day in range(7):
+            dd = s + dt.timedelta(days=day)
+            if dd.day == 1 and x - last_x > 44:
+                c.text(x + (x1 - x0) / len(vals) * day, ybase + 15, dd.strftime("%b").upper(),
+                       "mono", 8, "faint", "middle", ls=1)
+                last_x = x
+                break
     c.close()
-    for i, m in enumerate(months):
-        cx = PAD + slot * i + slot / 2
-        h = max(2, round(m["count"] / mx * maxh)) if m["count"] else 2
-        col = T["acc"] if i == len(months) - 1 else (T["accd"] if m["count"] else T["soft"])
-        c.rect(cx - 17, base - h, 34, h, col, rx=1, cls="grow", delay=260 + i * 45)
-        c.open(360 + i * 45, "fade")
-        c.text(cx, base - h - 8, str(m["count"]), "mono", 9.5, "ink" if m["count"] == mx else "faint", "middle")
-        c.text(cx, base + 22, m["label"].upper(), "mono", 9.5, "muted" if i == len(months) - 1 else "faint", "middle", ls=1)
-        c.close()
+    return c
+
+
+def streak(d):
+    H = 214
+    acct = d["account"]
+    first = dt.date.fromisoformat(d["all_time"]["since"])
+    today = dt.date.today()
+    long_ = d.get("longest") or {}
+    c = Card("streak", W, H, f"{plural(d['all_time']['total'], 'contribution')} since {first.strftime('%b %Y')}, "
+                             f"current streak {plural(d['current_streak'], 'day')}, "
+                             f"longest {plural(long_.get('days', 0), 'day')}.")
+    c.open(0)
+    c.head("05", "GitHub activity", "Streaks")
+    c.close()
+    slot = CW / 3
+    x1, x2, x3 = PAD + slot * .5, PAD + slot * 1.5, PAD + slot * 2.5
+    c.open(120)
+    for x in (PAD + slot, PAD + slot * 2):
+        c.line(x, 84, x, 190, "soft")
+    c.close()
+    # total
+    c.open(160)
+    c.text(x1, 128, f"{d['all_time']['total']:,}", "disp", 42, "ink", "middle")
+    c.text(x1, 160, "Total contributions", "sans", 13, "dim", "middle")
+    c.text(x1, 184, f"{first.strftime('%b %Y').upper()} — PRESENT", "mono", 8.5, "faint", "middle", ls=1.2)
+    c.close()
+    # current streak, with the ring
+    cx, cy, r = x2, 112, 34
+    c.open(220)
+    c.add(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{T["soft"]}" stroke-width="6"/>')
+    c.add(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{T["acc"]}" stroke-width="6" '
+          f'stroke-linecap="round" transform="rotate(-90 {cx} {cy})" '
+          f'stroke-dasharray="{2 * 3.14159265 * r:.1f} {2 * 3.14159265 * r:.1f}"/>')
+    c.add(f'<g transform="translate({cx - 7} {cy - r - 28}) scale(1.5)">{FLAME.format(c=T["acc"])}</g>')
+    c.text(cx, cy + 12, str(d["current_streak"]), "disp", 34, "ink", "middle")
+    c.text(x2, 160, "Current streak", "sansb", 14, "ink", "middle")
+    c.text(x2, 184, f"AS OF {today.strftime('%d %b').upper()}", "mono", 8.5, "faint", "middle", ls=1.2)
+    c.close()
+    # longest
+    c.open(280)
+    c.text(x3, 128, str(long_.get("days", 0)), "disp", 42, "ink", "middle")
+    c.text(x3, 160, "Longest streak", "sans", 13, "dim", "middle")
+    if long_:
+        f, t = dt.date.fromisoformat(long_["from"]), dt.date.fromisoformat(long_["to"])
+        rng = (f"{f.strftime('%d %b').upper()} — {t.strftime('%d %b').upper()}" if f.month == t.month
+               else f"{f.strftime('%d %b').upper()} — {t.strftime('%d %b').upper()}")
+        c.text(x3, 184, rng + "  ·  12 MO", "mono", 8.5, "faint", "middle", ls=1.2)
+    else:
+        c.text(x3, 184, "NONE IN THE LAST 12 MO", "mono", 8.5, "faint", "middle", ls=1.2)
+    c.close()
     return c
 
 
@@ -506,6 +627,9 @@ def synth(profile):
         rows.append({"s": d.isoformat(), "c": c})
         d += dt.timedelta(days=7)
     out = summarize(rows, rows, today)
+    out["account"] = {"name": "Saransh Singh (Splo1t)", "joined": "2023-10-24",
+                      "public_repos": 16, "location": "India"}
+    out["all_time"] = {"total": 149, "since": "2023-10-24"}
     out["repos"] = {r["slug"]: {"stars": 1 if i == 1 else 0, "language": ["C++", "C"][i % 2], "color": ["#f34b7d", "#555555"][i % 2]}
                     for i, r in enumerate(x for x in profile["projects"] if x.get("slug"))}
     return out
@@ -526,7 +650,8 @@ def main():
     # one height for every project card keeps the two-column grid square
     ph = max(286, *(round(project_layout(r)[2]) + 44 for r in projs))
     cards += [project(r, i, repo_meta(r), 200 + i * 80, ph) for i, r in enumerate(projs)]
-    cards += [focus(profile), how(profile), chart(data), graph(data, 600), priorities(profile), closing(profile)]
+    cards += [focus(profile), how(profile), details(profile, data), streak(data), graph(data, 600),
+              priorities(profile), closing(profile)]
     OUT.mkdir(exist_ok=True)
     for old in OUT.glob("*.svg"):
         old.unlink()

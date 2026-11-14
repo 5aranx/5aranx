@@ -60,20 +60,30 @@ def streaks(days, today):
         cur += 1
         d -= DAY
     best = run = 0
+    best_end = None
     for d, c in sorted(days):
-        run = run + 1 if c > 0 else 0
-        best = max(best, run)
-    return cur, best
+        if c > 0:
+            run += 1
+            if run > best:
+                best, best_end = run, d
+        else:
+            run = 0
+    return cur, best, best_end
 
 
 def summarize(grid_rows, month_rows, today):
     gdays = day_list(grid_rows)
-    cur, best = streaks(gdays, today)
+    cur, best, best_end = streaks(gdays, today)
     peak = max(gdays, key=lambda x: (x[1], x[0]), default=None)
+    longest = None
+    if best_end and best:
+        longest = {"days": best, "from": (best_end - dt.timedelta(days=best - 1)).isoformat(),
+                   "to": best_end.isoformat()}
     return {
         "total": sum(c for _, c in gdays),
         "current_streak": cur,
         "longest_streak": best,
+        "longest": longest,
         "active_days": sum(1 for _, c in gdays if c > 0),
         "busiest": {"date": peak[0].isoformat(), "count": peak[1]} if peak and peak[1] > 0 else None,
         "months": month_buckets(day_list(month_rows), today),
@@ -125,6 +135,32 @@ def main():
     out = summarize(week_rows(u["grid"]["contributionCalendar"]["weeks"]),
                     week_rows(u["months"]["contributionCalendar"]["weeks"]), today)
 
+    # account facts for the summary card (joined, public repos, where)
+    aq = ("query($l:String!){user(login:$l){name createdAt location "
+          "repositories(privacy:PUBLIC,ownerAffiliations:OWNER){totalCount}}}")
+    a = gql(aq, {"l": login}, token)["user"]
+    joined = dt.date.fromisoformat(a["createdAt"][:10])
+    out["account"] = {
+        "name": a.get("name") or login,
+        "joined": joined.isoformat(),
+        "public_repos": a["repositories"]["totalCount"],
+        "location": a.get("location"),
+    }
+
+    # lifetime contributions, one call per calendar year since the account opened
+    lifetime = 0
+    for year in range(joined.year, today.year + 1):
+        f = max(joined, dt.date(year, 1, 1))
+        t = min(today, dt.date(year, 12, 31))
+        if f > t:
+            continue
+        qy = ("query($l:String!,$f:DateTime!,$t:DateTime!){user(login:$l){"
+              "contributionsCollection(from:$f,to:$t){contributionCalendar{totalContributions}}}}")
+        year_total = gql(qy, {"l": login, "f": iso(f), "t": iso(t)}, token)["user"][
+            "contributionsCollection"]["contributionCalendar"]["totalContributions"]
+        lifetime += year_total
+    out["all_time"] = {"total": lifetime, "since": joined.isoformat()}
+
     slugs = [r["slug"] for r in profile["projects"] if r.get("slug")]
     out["repos"] = {}
     if slugs:
@@ -138,7 +174,7 @@ def main():
                 lang = r.get("primaryLanguage") or {}
                 out["repos"][s] = {"stars": r["stargazerCount"], "language": lang.get("name"), "color": lang.get("color")}
     (ROOT / "contribution_data.json").write_text(json.dumps(out, indent=1))
-    print(f"@{login}: total={out['total']} streak={out['current_streak']} active={out['active_days']} repos={len(out['repos'])}")
+    print(f"@{login}: total={out['total']} streak={out['current_streak']} active={out['active_days']} lifetime={out['all_time']['total']} repos={len(out['repos'])}")
 
 
 if __name__ == "__main__":

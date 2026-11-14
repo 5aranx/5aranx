@@ -2,6 +2,11 @@
  "total": 104,
  "current_streak": 3,
  "longest_streak": 3,
+ "longest": {
+  "days": 3,
+  "from": "2026-07-24",
+  "to": "2026-07-26"
+ },
  "active_days": 39,
  "busiest": {
   "date": "2026-06-11",
@@ -707,6 +712,16 @@
    ]
   }
  ],
+ "account": {
+  "name": "Saransh Singh (Splo1t)",
+  "joined": "2023-10-24",
+  "public_repos": 16,
+  "location": "India"
+ },
+ "all_time": {
+  "total": 149,
+  "since": "2023-10-24"
+ },
  "repos": {
   "5aranx/Mayavi": {
    "stars": 0,

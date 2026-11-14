@@ -33,7 +33,9 @@
 
 <img src="cards/how.svg" width="100%" alt="How I work: authorised scope only, ask what the attacker gets, say what is private, write it up." />
 
-<img src="cards/chart.svg" width="100%" alt="GitHub activity: contributions per month over the last 12 months, with current streak, active days and busiest day." />
+<img src="cards/details.svg" width="100%" alt="GitHub summary: 104 contributions in the last year, public repo count, join date and location, with a daily contribution curve." />
+
+<img src="cards/streak.svg" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
 
 <img src="cards/graph.svg" width="100%" alt="GitHub contribution graph for the last year." />
 
