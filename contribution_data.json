@@ -1,16 +1,16 @@
 {
- "total": 104,
- "current_streak": 3,
- "longest_streak": 3,
+ "total": 130,
+ "current_streak": 4,
+ "longest_streak": 4,
  "longest": {
-  "days": 3,
-  "from": "2026-07-24",
-  "to": "2026-07-26"
+  "days": 4,
+  "from": "2026-11-12",
+  "to": "2026-11-15"
  },
  "active_days": 39,
  "busiest": {
-  "date": "2026-06-11",
-  "count": 12
+  "date": "2026-11-15",
+  "count": 27
  },
  "months": [
   {
@@ -51,7 +51,7 @@
   {
    "key": "2026-07",
    "label": "Jul",
-   "count": 28
+   "count": 27
   },
   {
    "key": "2026-08",
@@ -71,22 +71,10 @@
   {
    "key": "2026-11",
    "label": "Nov",
-   "count": 16
+   "count": 43
   }
  ],
  "grid": [
-  {
-   "s": "2025-11-09",
-   "c": [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    0
-   ]
-  },
   {
    "s": "2025-11-16",
    "c": [
@@ -526,7 +514,7 @@
     0,
     1,
     6,
-    1,
+    0,
     0,
     0
    ]
@@ -710,6 +698,18 @@
     2,
     6
    ]
+  },
+  {
+   "s": "2026-11-15",
+   "c": [
+    27,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ]
   }
  ],
  "account": {
@@ -719,7 +719,7 @@
   "location": "India"
  },
  "all_time": {
-  "total": 149,
+  "total": 175,
   "since": "2023-10-24"
  },
  "repos": {

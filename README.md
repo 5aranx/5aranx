@@ -34,11 +34,11 @@
 
 <img src="cards/how.svg?v=2c0ca8bd48" width="100%" alt="How I work: authorised scope only, ask what the attacker gets, say what is private, write it up." />
 
-<img src="cards/details.svg?v=4cbf0665f3" width="100%" alt="GitHub summary: 104 contributions in the last year, public repo count, join date and location, with a daily contribution curve." />
+<img src="cards/details.svg?v=a6302edeea" width="100%" alt="GitHub summary: 104 contributions in the last year, public repo count, join date and location, with a daily contribution curve." />
 
-<img src="cards/streak.svg?v=09d518db35" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
+<img src="cards/streak.svg?v=f854a63fde" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
 
-<img src="cards/graph.svg?v=a489088f08" width="100%" alt="GitHub contribution graph for the last year." />
+<img src="cards/graph.svg?v=aa098ef265" width="100%" alt="GitHub contribution graph for the last year." />
 
 <img src="cards/priorities.svg?v=a2da5f5cb0" width="100%" alt="2026 priorities: a measurement-backed PUF write-up, sanitised Drax findings, more blue-team detection work, upstream contributions." />
 
