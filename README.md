@@ -13,12 +13,12 @@
 
 <img src="cards/about.svg?v=e743d008c8" width="100%" alt="About: Saransh Singh is a final-year Electronics and Communication Engineering student at DCRUST Murthal, India, and Cybersecurity Lead for the 2026 batch. He started on the blue-team side and now spends most of his time on offence: mobile application testing, hardware security and drone authentication. He learns by building and ends each project with a write-up." />
 
-<img src="cards/work.svg?v=d03692362b" width="100%" alt="Selected projects." />
+<img src="cards/work.svg?v=9dfae873a1" width="100%" alt="Selected projects." />
 
 <table>
 <tr>
 <td width="50%" valign="top"><a href="https://github.com/5aranx/Mayavi"><img src="cards/project-0.svg?v=11af98e9c5" width="100%" alt="Mayavi: BLE HID emulation and keystroke framework for the ESP32-S3, with a Wi-Fi dashboard served from the device. C++." /></a></td>
-<td width="50%" valign="top"><a href="https://github.com/5aranx/PUF-Based-Drone-Authentication-System"><img src="cards/project-1.svg?v=02a127fc97" width="100%" alt="PUF drone authentication: SRAM PUFs and BCH fuzzy extractors rebuild a 128-bit secret from silicon, so no key sits in flash. ESP32 firmware in C, Flask dashboard." /></a></td>
+<td width="50%" valign="top"><a href="https://github.com/5aranx/PUF-Based-Drone-Authentication-System"><img src="cards/project-1.svg?v=dd35740952" width="100%" alt="PUF drone authentication: SRAM PUFs and BCH fuzzy extractors rebuild a 128-bit secret from silicon, so no key sits in flash. ESP32 firmware in C, Flask dashboard." /></a></td>
 </tr>
 <tr>
 <td width="50%" valign="top"><img src="cards/project-2.svg?v=9e4a36fbd4" width="100%" alt="Drax, private: mobile app security scanner, a Python core plus an Android agent over ADB, built to keep working inside RASP-protected apps." /></td>
@@ -34,11 +34,11 @@
 
 <img src="cards/how.svg?v=2c0ca8bd48" width="100%" alt="How I work: authorised scope only, ask what the attacker gets, say what is private, write it up." />
 
-<img src="cards/details.svg?v=a6302edeea" width="100%" alt="GitHub summary: 104 contributions in the last year, public repo count, join date and location, with a daily contribution curve." />
+<img src="cards/details.svg?v=371ddaac54" width="100%" alt="GitHub summary: 104 contributions in the last year, public repo count, join date and location, with a daily contribution curve." />
 
-<img src="cards/streak.svg?v=f854a63fde" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
+<img src="cards/streak.svg?v=b69748827b" width="100%" alt="Streaks: total contributions since joining, current streak and longest streak in the last 12 months." />
 
-<img src="cards/graph.svg?v=aa098ef265" width="100%" alt="GitHub contribution graph for the last year." />
+<img src="cards/graph.svg?v=0cdb3a5ac4" width="100%" alt="GitHub contribution graph for the last year." />
 
 <img src="cards/priorities.svg?v=a2da5f5cb0" width="100%" alt="2026 priorities: a measurement-backed PUF write-up, sanitised Drax findings, more blue-team detection work, upstream contributions." />
 
