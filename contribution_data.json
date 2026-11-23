@@ -1,13 +1,13 @@
 {
- "total": 206,
- "current_streak": 2,
+ "total": 207,
+ "current_streak": 3,
  "longest_streak": 7,
  "longest": {
   "days": 7,
   "from": "2026-11-12",
   "to": "2026-11-18"
  },
- "active_days": 44,
+ "active_days": 45,
  "busiest": {
   "date": "2026-11-15",
   "count": 42
@@ -71,14 +71,14 @@
   {
    "key": "2026-11",
    "label": "Nov",
-   "count": 119
+   "count": 120
   }
  ],
  "grid": [
   {
    "s": "2025-11-23",
    "c": [
-    0,
+    null,
     0,
     0,
     0,
@@ -702,8 +702,8 @@
   {
    "s": "2026-11-22",
    "c": [
+    1,
     0,
-    null,
     null,
     null,
     null,
@@ -719,7 +719,7 @@
   "location": "India"
  },
  "all_time": {
-  "total": 251,
+  "total": 252,
   "since": "2023-10-24"
  },
  "repos": {
