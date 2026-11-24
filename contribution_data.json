@@ -1,6 +1,6 @@
 {
  "total": 207,
- "current_streak": 3,
+ "current_streak": 0,
  "longest_streak": 7,
  "longest": {
   "days": 7,
@@ -79,7 +79,7 @@
    "s": "2025-11-23",
    "c": [
     null,
-    0,
+    null,
     0,
     0,
     0,
@@ -704,7 +704,7 @@
    "c": [
     1,
     0,
-    null,
+    0,
     null,
     null,
     null,
